@@ -7,33 +7,34 @@ import {
   PokemonInfoFallback,
   PokemonForm,
   PokemonDataView,
-  // 🐨 you'll need PokemonErrorBoundary here
+  PokemonErrorBoundary
 } from '../pokemon'
-// 🐨 you'll need createResource from ../utils
+
+import { createResource } from '../utils'
 
 // 🐨 Your goal is to refactor this traditional useEffect-style async
 // interaction to suspense with resources. Enjoy!
 
-function PokemonInfo({pokemonName}) {
+function PokemonInfo({ pokemonName }) {
   // 💣 you're pretty much going to delete all this stuff except for the one
   // place where 🐨 appears
-  const [state, setState] = React.useReducer((s, a) => ({...s, ...a}), {
+  const [state, setState] = React.useReducer((s, a) => ({ ...s, ...a }), {
     pokemon: null,
     error: null,
     status: 'pending',
   })
 
-  const {pokemon, error, status} = state
+  const { pokemon, error, status } = state
 
   React.useEffect(() => {
     let current = true
-    setState({status: 'pending'})
+    setState({ status: 'pending' })
     fetchPokemon(pokemonName).then(
       p => {
-        if (current) setState({pokemon: p, status: 'success'})
+        if (current) setState({ pokemon: p, status: 'success' })
       },
       e => {
-        if (current) setState({error: e, status: 'error'})
+        if (current) setState({ error: e, status: 'error' })
       },
     )
     return () => (current = false)
@@ -49,7 +50,7 @@ function PokemonInfo({pokemonName}) {
     return (
       <div>
         There was an error.
-        <pre style={{whiteSpace: 'normal'}}>{error.message}</pre>
+        <pre style={{ whiteSpace: 'normal' }}>{error.message}</pre>
       </div>
     )
   }
