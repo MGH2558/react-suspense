@@ -12,9 +12,6 @@ import {
 
 import { createResource } from '../utils'
 
-// 🐨 Your goal is to refactor this traditional useEffect-style async
-// interaction to suspense with resources. Enjoy!
-
 function PokemonInfo({ pokemonResource }) {
 
   const pokemon = pokemonResource.read();
