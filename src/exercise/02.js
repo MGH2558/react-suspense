@@ -26,6 +26,7 @@ function PokemonInfo({ pokemonResource }) {
   )
 }
 
+
 function App() {
 
   const [pokemonName, setPokemonName] = React.useState('')
